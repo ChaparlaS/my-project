@@ -1,8 +1,14 @@
+# Use OpenJDK 8 JRE as the base image
 FROM openjdk:8-jre-alpine
 
+# Expose port 8080 for the application
 EXPOSE 8080
 
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
+# Copy the built JAR file into the container
+COPY build/libs/*.jar /usr/app/app.jar
+
+# Set the working directory inside the container
 WORKDIR /usr/app
 
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
